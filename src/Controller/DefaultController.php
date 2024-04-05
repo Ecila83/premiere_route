@@ -2,22 +2,40 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class DefaultController {
-    
-// exercice 4
-    #[Route('/blog/{title}', name: 'blog', methods:['GET'],requirements:['title' => '[\p{L}\-]+'])]
-    public function blog(string $title){
-        if (!preg_match('/^[\p{L}_\-]+$/u', $title)) {
-            return new JsonResponse(['error' => 'Paramètre de titre invalide.'], Response::HTTP_BAD_REQUEST);
+
+class DefaultController extends AbstractController {
+// exercice 6
+    #[Route('/article/{title}', name: 'article', methods:['GET'])]
+    public function article(string $title )
+    {   
+        if (in_array($title, ['jambon', 'pain', 'carotte'])) {
+            return new Response('<h1>Article ' . $title. '</h1>');
+        } else {
+            throw $this->createNotFoundException('Aucun article');     
         }
-        $title = str_replace('-', ' ',$title);
-        return new Response('<h1>Titre : ' . $title . '</h1>');
-    }
+     }
+// exercice 5
+    // #[route('/accueil', name: 'accueil')]
+    // public function index()
+    // {
+    //     return new Response('<h1>Bienvenue</h1>');
+    // }
+
+// exercice 4
+    // #[Route('/blog/{title}', name: 'blog', methods:['GET'],requirements:['title' => '[\p{L}\-]+'])]
+    // public function blog(string $title){
+    //     if (!preg_match('/^[\p{L}_\-]+$/u', $title)) {
+    //         return new JsonResponse(['error' => 'Paramètre de titre invalide.'], Response::HTTP_BAD_REQUEST);
+    //     }
+    //     $title = str_replace('-', ' ',$title);
+    //     return new Response('<h1>Titre : ' . $title . '</h1>');
+    // }
 
 // exercice 3
     // #[Route('/animal/{animal?}', name: 'animal', methods:['GET'])]
