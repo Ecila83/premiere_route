@@ -10,16 +10,30 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 class DefaultController extends AbstractController {
+//Twig
+// exercice 1
+#[route('/', name: 'animaux')]
+public function animaux(){
+    $animaux = [
+        'Chien',
+        'Chat',
+        'Lapin'
+    ];
+    return $this->render('/test.html.twig', ['animaux' => $animaux]);
+    }
+
+
+//Route
 // exercice 6
-    #[Route('/article/{title}', name: 'article', methods:['GET'])]
-    public function article(string $title )
-    {   
-        if (in_array($title, ['jambon', 'pain', 'carotte'])) {
-            return new Response('<h1>Article ' . $title. '</h1>');
-        } else {
-            throw $this->createNotFoundException('Aucun article');     
-        }
-     }
+    // #[Route('/article/{title}', name: 'article', methods:['GET'])]
+    // public function article(string $title )
+    // {   
+    //     if (in_array($title, ['jambon', 'pain', 'carotte'])) {
+    //         return new Response('<h1>Article ' . $title. '</h1>');
+    //     } else {
+    //         throw $this->createNotFoundException('Aucun article');     
+    //     }
+    //  }
 // exercice 5
     // #[route('/accueil', name: 'accueil')]
     // public function index()
