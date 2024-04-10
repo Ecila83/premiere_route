@@ -1,8 +1,14 @@
-{% if animaux %}
+{# exercice 2 #}
+<p>
+    {% set nomsComplets = utilisateurs | map(user => user.prenom ~ ' ' ~ user.nom) %}
+    {{ nomsComplets | join(' - ') }}
+</p>
+{# exercice 1 #}
+{# {% if animaux %}
 	<ul>
 	  {# Votre code avec la boucle for #}
-      {% for animal in animaux %}
+      {# {% for animal in animaux %}
         <li>{{animal}}</li>      
       {% endfor %}
 	</ul>
-{% endif %}
+{% endif %} #} 

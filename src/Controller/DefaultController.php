@@ -11,16 +11,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController {
 //Twig
-// exercice 1
-#[route('/', name: 'animaux')]
-public function animaux(){
-    $animaux = [
-        'Chien',
-        'Chat',
-        'Lapin'
-    ];
-    return $this->render('/test.html.twig', ['animaux' => $animaux]);
+// exercice 2
+#[Route('/', name: 'index')]
+    public function index(): Response
+    {
+        $utilisateurs = [
+            ['prenom' => 'Jean', 'nom' => 'Dupont'],
+            ['prenom' => 'Marie', 'nom' => 'Jeanne'],
+            ['prenom' => 'Philippe', 'nom' => 'Moris'],
+        ];
+        return $this->render('test.html.twig', ['utilisateurs' => $utilisateurs]);
     }
+// exercice 1
+// #[route('/', name: 'animaux')]
+// public function animaux(){
+//     $animaux = [
+//         'Chien',
+//         'Chat',
+//         'Lapin'
+//     ];
+//     return $this->render('/test.html.twig', ['animaux' => $animaux]);
+//     }
 
 
 //Route
