@@ -1,0 +1,7 @@
+{% block user %}
+<a href="{{ path('index')}}">Accueil</a>
+   {% if user %}
+    <p>{{user.id}} : {{user.name}}</p>
+   {% endif %}
+   
+{% endblock %}

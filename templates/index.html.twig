@@ -1,0 +1,11 @@
+
+{% block body %}
+<a href="{{ path('index')}}">Accueil</a>
+{% for user in users %}
+    <li>
+        <h2>
+            <a href="{{ path('profile', {'id': user.id}) }}">{{ user.name }}</a>
+        </h2>
+    </li>
+{% endfor %}
+{% endblock %}

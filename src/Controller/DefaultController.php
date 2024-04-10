@@ -11,17 +11,39 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController {
 //Twig
-// exercice 2
-#[Route('/', name: 'index')]
+// exercice 3
+const users = [
+    ['id' => 12, 'name' => 'Paul'],
+    ['id' => 14, 'name' => 'Jean'],
+    ['id' => 22, 'name' => 'Marie'],
+    ['id' => 1, 'name' => 'Sophie'],
+];
+    #[Route(path: '/', name: 'index')]
     public function index(): Response
     {
-        $utilisateurs = [
-            ['prenom' => 'Jean', 'nom' => 'Dupont'],
-            ['prenom' => 'Marie', 'nom' => 'Jeanne'],
-            ['prenom' => 'Philippe', 'nom' => 'Moris'],
-        ];
-        return $this->render('test.html.twig', ['utilisateurs' => $utilisateurs]);
+        return $this->render('index.html.twig', ['users' => self::users]);
     }
+
+    #[Route('/{id}', name: 'profile')]
+    public function profile(string $id): Response
+    {
+        $userIndex = array_search($id, array_column(self::users, 'id'));
+        if ($userIndex === false) {
+            throw $this->createNotFoundException('L\'utilisateur n\'existe pas !');
+        }
+        return $this->render('user_profile.html.twig', ['user' => self::users[$userIndex]]);
+    }
+// exercice 2
+// #[Route('/', name: 'index')]
+//     public function index(): Response
+//     {
+//         $utilisateurs = [
+//             ['prenom' => 'Jean', 'nom' => 'Dupont'],
+//             ['prenom' => 'Marie', 'nom' => 'Jeanne'],
+//             ['prenom' => 'Philippe', 'nom' => 'Moris'],
+//         ];
+//         return $this->render('test.html.twig', ['utilisateurs' => $utilisateurs]);
+//     }
 // exercice 1
 // #[route('/', name: 'animaux')]
 // public function animaux(){
